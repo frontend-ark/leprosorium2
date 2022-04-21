@@ -92,6 +92,19 @@ get '/details/:post_id' do
 end
 
 
+# обработчик post запроса /details/...
+# (браузер отправляет данные на сервер, а мы из принимаем)
+post '/details/:post_id' do
+
+  # получаем перенную из url'а
+  post_id = params[:post_id]
+
+  # получаем переменную из post запроса
+  content = params[:content]
+
+  erb "you tiped #{content} for post #{post_id }"
+
+end
 
 
 
