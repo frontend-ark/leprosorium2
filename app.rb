@@ -110,8 +110,25 @@ post '/details/:post_id' do
   # получаем переменную из post запроса
   content = params[:content]
 
-  erb "you tiped #{content} for post #{post_id }"
+  # созранение данных в БД
+  @db.execute 'insert into Comments
+    (
+      content, 
+      created_date, 
+      post_id
+    ) 
+      values 
+    (
+      ?, 
+      datetime(),
+      ?
+    )', [content, post_id]
 
+  erb "you tiped '#{content}' for post #{post_id }"
+
+  # перенаправление на страницу поста
+
+  redirect to('/details/' + post_id)
 end
 
 
